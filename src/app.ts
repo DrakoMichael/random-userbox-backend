@@ -32,6 +32,12 @@ export class App {
   //   // inicia a instância da conexão com o banco usando TypeORM
   // }
 
+  // desabilita o x-powered-by - isso são informações sobre a tecnologia do servidor
+  // que podem ser exploradas por hackers - pra aumentar a segurança
+  private async config(): Promise<void> {
+    this.app.disable("x-powered-by");
+  }
+
   private async middleware(): Promise<void> {
     /*
      * @descricao define os middlewares da aplicação
@@ -45,6 +51,39 @@ export class App {
      */
     this.app.use(`${this.version}/main`, RouteMain);
     this.app.use(`${this.version}/users`, RouteUsers);
+  }
+
+  // Função utilitária para padronizar respostas
+  private apiResponse(
+    status: number,
+    message: string,
+    data?: any,
+    error?: any
+  ) {
+    return {
+      status,
+      message,
+      data: data || null,
+      error: error || null,
+    };
+  }
+
+  private async globalRoute(): Promise<any> {
+    this.app.all(["/", "/api/v1/"], (_req: Request, res: Response) =>
+      res.status(200).json(this.apiResponse(200, "Server Ping !"))
+    );
+    this.app.all("", (req: Request, res: Response) => {
+      return res
+        .status(404)
+        .json(
+          this.apiResponse(
+            404,
+            "Route path is not exist on server",
+            { hostname: req.hostname, path: req.path },
+            null
+          )
+        );
+    });
   }
 
   private async run(): Promise<void> {
@@ -78,9 +117,9 @@ export class App {
 
   public async main(): Promise<void> {
     await this.middleware();
-    // await this.config()
+    await this.config();
     await this.route();
-    // await this.globalRoute() - deletado - opcional
+    await this.globalRoute(); // - deletado - opcional;
     await this.run();
   }
 
