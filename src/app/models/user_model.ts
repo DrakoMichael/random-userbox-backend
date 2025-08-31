@@ -1,4 +1,4 @@
-import User from "../interfaces/user_interface";
+import User from "../interfaces/interface.user";
 
 export class UserModel implements User {
   id!: string;
