@@ -1,3 +1,4 @@
 node_modules
-app.js
-html.js
+.env
+Dist
+src/app/database/database.sqlite

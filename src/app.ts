@@ -4,6 +4,7 @@ import "dotenv/config";
 import gracefulShutdown from "http-graceful-shutdown";
 import RouteMain from "./app/routes/routes.main";
 import RouteUsers from "./app/routes/routes.users";
+import { DataSourceDataBase } from "./app/database/DataSourceDataBase";
 
 export class App {
   /*
@@ -15,15 +16,15 @@ export class App {
   private version: string;
   private env: string;
   private port: number;
-  //private pathEntitiesDir: string;
-  //private pathMigrationDir: string;
+  private pathEntitiesDir: string;
+  private pathMigrationDir: string;
 
   constructor() {
     this.app = express();
     this.server = http.createServer(this.app);
     this.version = "/api/v1";
-    //this.pathEntitiesDir = "src/models/*.ts";
-    //this.pathMigrationDir = "src/database/migrations";
+    this.pathEntitiesDir = "src/models/*.ts";
+    this.pathMigrationDir = "src/database/migrations";
     this.env = process.env.NODE_ENV as string;
     this.port = +(process.env.PORT ?? 3000);
   }
@@ -91,6 +92,8 @@ export class App {
      * @connection - aguardar a conexão com o banco com TypeORM - não implementado
      */
     // const connection: typeorm.Connection = await this.connection();
+    const dataSourceDataBase = new DataSourceDataBase();
+    const connection = await dataSourceDataBase.getDataSource();
     const serverInfo: string = `Server is running on port: ${this.port}`;
     if (this.env != "production") {
       this.server.listen(this.port, () => console.log(serverInfo));
@@ -107,7 +110,7 @@ export class App {
           forceExit: true,
           timeout: 60000,
           onShutdown: async function (): Promise<void> {
-            //await connection.close();
+            connection.destroy;
             console.log("Server gracefully shutdown");
           },
         }
@@ -119,7 +122,7 @@ export class App {
     await this.middleware();
     await this.config();
     await this.route();
-    await this.globalRoute(); // - deletado - opcional;
+    // await this.globalRoute(); // - deletado - opcional;
     await this.run();
   }
 

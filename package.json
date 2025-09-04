@@ -14,11 +14,15 @@
     "express": "^5.1.0",
     "http-graceful-shutdown": "^3.1.14",
     "path-to-regexp": "^8.2.0",
-    "reusify": "^1.1.0"
+    "reflect-metadata": "^0.2.2",
+    "reusify": "^1.1.0",
+    "typeorm": "^0.3.26"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/typescript": "^2.0.0",
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.1.7",
     "tsc": "^2.0.4",
     "typescript": "^5.9.2"
   }
