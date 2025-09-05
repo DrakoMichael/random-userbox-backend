@@ -1,13 +1,12 @@
 import { DataSource } from "typeorm";
+import TypeormConfig from "../config/config.database";
 
 export class DataSourceDataBase {
   private datasource: DataSource;
+  private TypeormConfig = TypeormConfig;
 
   constructor() {
-    this.datasource = new DataSource({
-      type: "sqlite",
-      database: "./src/app/database/database.sqlite",
-    });
+    this.datasource = new DataSource(this.TypeormConfig as any);
   }
 
   private databaseConnect = async () => {
