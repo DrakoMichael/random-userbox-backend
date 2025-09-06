@@ -5,6 +5,8 @@ import gracefulShutdown from "http-graceful-shutdown";
 import RouteMain from "./app/routes/routes.main";
 import RouteUsers from "./app/routes/routes.users";
 import { DataSourceDataBase } from "./app/database/DataSourceDataBase";
+import chalk from "chalk";
+import logSymbols from "log-symbols";
 
 export class App {
   /*
@@ -94,7 +96,10 @@ export class App {
     // const connection: typeorm.Connection = await this.connection();
     const dataSourceDataBase = new DataSourceDataBase();
     const connection = await dataSourceDataBase.getDataSource();
-    const serverInfo: string = `Server is running on port: ${this.port}`;
+    const serverInfo: string = chalk.yellow.bgBlack(
+      logSymbols.success,
+      `Server is running on port: ${this.port}`
+    );
     if (this.env != "production") {
       this.server.listen(this.port, () => console.log(serverInfo));
     } else {

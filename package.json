@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./dist/src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clearbuild": "rmdir /s /q dist && npm install",
+    "start:watch": "node --watch ./dist/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,8 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/typescript": "^2.0.0",
+    "chalk": "^5.6.0",
+    "log-symbols": "^7.0.1",
     "mysql": "^2.18.1",
     "sqlite3": "^5.1.7",
     "tsc": "^2.0.4",

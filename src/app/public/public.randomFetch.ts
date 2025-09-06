@@ -1,4 +1,4 @@
-export default class randomFetch {
+class randomFetch {
   private static url = "https://randomuser.me/api/";
 
   public static async fetchRandomUser() {
@@ -20,7 +20,9 @@ export default class randomFetch {
 
       return response;
     } catch (error) {
-      console.error("Error fetching random user: err omitted");
+      console.error("Error fetching random user: err omitted!");
     }
   }
 }
+
+export default randomFetch;

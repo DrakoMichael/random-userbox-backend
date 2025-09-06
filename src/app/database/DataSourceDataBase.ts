@@ -1,5 +1,7 @@
 import { DataSource } from "typeorm";
 import TypeormConfig from "../config/config.database";
+import chalk from "chalk";
+import logSymbols from "log-symbols";
 
 export class DataSourceDataBase {
   private datasource: DataSource;
@@ -12,9 +14,22 @@ export class DataSourceDataBase {
   private databaseConnect = async () => {
     try {
       await this.datasource.initialize();
-      console.log("Data Source has been initialized!");
+      chalk.bgBlack.yellow(
+        logSymbols.success,
+        console.log(
+          chalk.bgBlack.yellow(
+            logSymbols.success,
+            "Data Source has been initialized!"
+          )
+        )
+      );
     } catch (err) {
-      console.error("Error during Data Source initialization: {err omitted}");
+      console.error(
+        chalk.bgBlack.red(
+          logSymbols.error,
+          "Error during Data Source initialization: {err omitted}"
+        )
+      );
     }
   };
 
