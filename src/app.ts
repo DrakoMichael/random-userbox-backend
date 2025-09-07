@@ -98,7 +98,7 @@ export class App {
     const connection = await dataSourceDataBase.getDataSource();
     const serverInfo: string = chalk.yellow.bgBlack(
       logSymbols.success,
-      `Server is running on port: ${this.port}`
+      `Server is running on port: ${this.port} `
     );
     if (this.env != "production") {
       this.server.listen(this.port, () => console.log(serverInfo));

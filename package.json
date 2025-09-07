@@ -2,11 +2,14 @@
   "name": "prog-geral",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
+  "module": "commonjs",
   "scripts": {
     "start": "node ./dist/src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clearbuild": "rmdir /s /q dist && npm install",
-    "start:watch": "node --watch ./dist/app.js"
+    "start:watch": "node --watch ./dist/app.js",
+    "start:ts-node": "ts-node src/app.ts"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +30,7 @@
     "log-symbols": "^7.0.1",
     "mysql": "^2.18.1",
     "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
     "tsc": "^2.0.4",
     "typescript": "^5.9.2"
   }

@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 .env
-Dist
-src/app/database/database.sqlite
+dist/
+src/app/database/**.sqlite
