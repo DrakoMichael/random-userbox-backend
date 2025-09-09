@@ -1,0 +1,7 @@
+//for create
+//npm.pkg.github.com/:_authToken=TOKEN_ACCESS
+@user-name:registry=https://npm.pkg.github.com
+
+//for use
+@user-name:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=TOKEN_ACCESS
